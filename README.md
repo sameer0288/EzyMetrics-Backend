@@ -53,7 +53,6 @@ EMAIL_HOST=smtp.your-email-provider.com
 EMAIL_PORT=587
 EMAIL_USER=your-email@example.com
 EMAIL_PASS=your-email-password
-
 ```
 Replace your-email-provider.com, your-email@example.com, and your-email-password with your actual email configuration for email alerts.
 
@@ -66,12 +65,12 @@ The server should be running on http://localhost:5000.
 ### API Endpoints
 
 1. Fetch Campaign Data
-URL: /api/campaigns
+URL: /api/campaigns/fetch
 Method: GET
 Description: Fetches dummy campaign data from the database.
 Example Response:
 
-
+```bash
 [
     {
         "_id": "603f2e8f7c4e8a1e3c34b3c1",
@@ -88,14 +87,15 @@ Example Response:
         "createdAt": "2023-10-19T12:00:00Z"
     }
 ]
-
+```
 
 2. Fetch Lead Data
-URL: /api/leads
+URL: /api/leads/fetch
 Method: GET
 Description: Fetches dummy lead data from the database.
 Example Response:
 
+```bash
 [
     {
         "_id": "603f2e8f7c4e8a1e3c34b3c5",
@@ -112,14 +112,15 @@ Example Response:
         "createdAt": "2023-10-19T12:00:00Z"
     }
 ]
-
+```
 
 3. Run ETL Process
-URL: /api/etl
+URL: /api/campaigns/etl
 Method: GET
 Description: Runs the ETL process to generate metrics based on the current lead and campaign data.
 Example Response:
 
+```bash
 {
     "success": true,
     "metrics": {
@@ -129,10 +130,10 @@ Example Response:
         "totalCampaigns": 5
     }
 }
-
+```
 
 4. Generate Reports
-URL: /api/reports/download
+URL: /api/reports/csv
 Method: GET
 Description: Generates a CSV report based on the latest data.
 Example Response:
@@ -143,15 +144,19 @@ A downloadable CSV file.
 Email alerts are automatically sent when specific conditions are met during the ETL process:
 High conversion rate: If the conversion rate exceeds 50%, an alert email is sent.
 Low lead volume: If the total number of leads is below 10, an alert email is sent.
-How to Use
-Fetching Data: Use the endpoints /api/leads and /api/campaigns to fetch leads and campaigns data.
-Running ETL: Call /api/etl to process the data and generate metrics.
-Generating Reports: Hit /api/reports/download to generate and download reports.
+
+## How to Use
+Fetching Data: Use the endpoints /api/leads/fetch and /api/campaigns/fetch to fetch leads and campaigns data.
+
+Running ETL: Call /api/campaigns/etl to process the data and generate metrics.
+
+Generating Reports: Hit /api/reports/csv to generate and download reports.
+
 Email Alerts: Configure email settings in the .env file to receive alerts for conversion rates and lead volumes.
 
 
 Project Structure
-
+```bash
 ├── controllers
 │   ├── leadController.js     # Handles lead-related operations
 │   ├── campaignController.js  # Handles campaign-related operations
@@ -168,6 +173,7 @@ Project Structure
 ├── .env                      # Environment variables
 ├── app.js                    # Main application file
 └── README.md                 # API documentation
+```
 
 ## Testing
 To test the API, you can use tools like:
@@ -176,8 +182,9 @@ Postman: To manually test API requests.
 cURL: For command-line API testing.
 For example, to test the ETL process using curl:
 
-
-curl -X GET http://localhost:5000/api/etl
+```bash
+curl -X GET http://localhost:5000/api/campaigns/etl
+```
 License
 This project is licensed under the MIT License.
 
