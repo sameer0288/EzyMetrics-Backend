@@ -46,12 +46,15 @@ Create a .env file in the project root and add the following environment variabl
 
 ### env
 
+```bash
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/ezymetrics
 EMAIL_HOST=smtp.your-email-provider.com
 EMAIL_PORT=587
 EMAIL_USER=your-email@example.com
 EMAIL_PASS=your-email-password
+
+```
 Replace your-email-provider.com, your-email@example.com, and your-email-password with your actual email configuration for email alerts.
 
 ## Start the development server:
